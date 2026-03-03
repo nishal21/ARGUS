@@ -1,0 +1,253 @@
+.landing-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000005;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--hud-text);
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    overflow: hidden;
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.landing-container.fade-out {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.05); /* Slight warp in on exit */
+}
+
+/* Background Animated Grid */
+.grid-bg {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200vw;
+    height: 200vh;
+    background-image: 
+        linear-gradient(rgba(0, 229, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    transform: perspective(600px) rotateX(60deg) translateY(0);
+    animation: gridMove 10s linear infinite;
+    z-index: 0;
+    opacity: 0.3;
+}
+
+@keyframes gridMove {
+    from {
+        transform: perspective(600px) rotateX(60deg) translateY(0);
+    }
+    to {
+        transform: perspective(600px) rotateX(60deg) translateY(40px);
+    }
+}
+
+.vignette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, transparent 40%, #000005 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.landing-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.landing-logo-wrapper {
+    margin-bottom: 2rem;
+    filter: drop-shadow(0 0 15px var(--hud-accent-glow));
+}
+
+.landing-logo {
+    width: 160px;
+    height: auto;
+    object-fit: contain;
+}
+
+.landing-title {
+    font-size: 5rem;
+    font-weight: 700;
+    letter-spacing: 0.5rem;
+    margin: 0;
+    color: var(--hud-accent);
+    text-shadow: 0 0 20px var(--hud-accent-glow);
+    position: relative;
+}
+
+.landing-subtitle {
+    font-size: 1.2rem;
+    color: var(--hud-text-dim);
+    letter-spacing: 0.2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 3rem;
+}
+
+/* Boot Sequence Terminal */
+.landing-terminal {
+    width: 100%;
+    background: rgba(0, 5, 10, 0.7);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 4px;
+    padding: 1.5rem;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #4ade80; /* Hacker green */
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    min-height: 280px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 229, 255, 0.1);
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.terminal-line {
+    animation: typing 0.1s ease-out forwards;
+    opacity: 0;
+}
+
+.terminal-cursor {
+    display: inline-block;
+    width: 10px;
+    background-color: #4ade80;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes typing {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Action Area */
+.landing-action {
+    margin-top: 3rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease-out;
+}
+
+.landing-action.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.uplink-btn {
+    background: transparent;
+    border: 2px solid var(--hud-accent);
+    color: var(--hud-accent);
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.2rem;
+    font-family: inherit;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.uplink-btn:hover {
+    background: var(--hud-accent);
+    color: #000;
+    box-shadow: 0 0 30px var(--hud-accent-glow);
+}
+
+.uplink-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.warning-text {
+    color: #ff3333;
+    font-size: 0.8rem;
+    margin-top: 1.5rem;
+    letter-spacing: 0.1rem;
+    text-shadow: 0 0 5px rgba(255, 51, 51, 0.5);
+    animation: pulseWarning 2s infinite;
+}
+
+@keyframes pulseWarning {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+/* Glitch Effects */
+.glitch-text {
+    position: relative;
+}
+
+.glitch-text::before, .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch-text::before {
+    left: 2px;
+    text-shadow: -2px 0 red;
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+    left: -2px;
+    text-shadow: -2px 0 blue;
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% { clip: rect(10px, 9999px, 54px, 0); }
+    10% { clip: rect(61px, 9999px, 86px, 0); }
+    20% { clip: rect(2px, 9999px, 99px, 0); }
+    30% { clip: rect(66px, 9999px, 92px, 0); }
+    40% { clip: rect(14px, 9999px, 35px, 0); }
+    50% { clip: rect(81px, 9999px, 22px, 0); }
+    60% { clip: rect(4px, 9999px, 92px, 0); }
+    70% { clip: rect(50px, 9999px, 15px, 0); }
+    80% { clip: rect(29px, 9999px, 83px, 0); }
+    90% { clip: rect(38px, 9999px, 90px, 0); }
+    100% { clip: rect(52px, 9999px, 78px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+    0% { clip: rect(65px, 9999px, 100px, 0); }
+    10% { clip: rect(52px, 9999px, 74px, 0); }
+    20% { clip: rect(79px, 9999px, 85px, 0); }
+    30% { clip: rect(14px, 9999px, 47px, 0); }
+    40% { clip: rect(40px, 9999px, 94px, 0); }
+    50% { clip: rect(13px, 9999px, 32px, 0); }
+    60% { clip: rect(82px, 9999px, 88px, 0); }
+    70% { clip: rect(31px, 9999px, 11px, 0); }
+    80% { clip: rect(93px, 9999px, 18px, 0); }
+    90% { clip: rect(31px, 9999px, 49px, 0); }
+    100% { clip: rect(24px, 9999px, 9px, 0); }
+}
