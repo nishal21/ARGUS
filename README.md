@@ -21,6 +21,9 @@
 
 **ARGUS** is a web-based geospatial dashboard that visualizes real-time global object tracking (commercial flights and satellites) on top of a highly stylized, performant 3D globe. Designed to mimic top-secret defense intelligence tools, ARGUS features custom post-processing shader pipelines (CRT, Night Vision, Thermal) and specialized WebGL integrations.
 
+--
+This is Created Entirly  using AI
+
 ![Dashboard Preview](docs/media/dashboard.png)
 
 ## ✨ Features

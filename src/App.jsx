@@ -7,6 +7,7 @@ import Sidebar from './components/Sidebar'
 import HUDOverlay from './components/HUDOverlay'
 import CCTVMesh from './components/CCTVMesh'
 import TrafficSimulation from './components/TrafficSimulation'
+import LandingPage from './components/LandingPage'
 
 const DEFAULT_LAYERS = {
   terrain: true,
@@ -18,6 +19,7 @@ const DEFAULT_LAYERS = {
 }
 
 export default function App() {
+  const [showLanding, setShowLanding] = useState(true)
   const [preset, setPreset] = useState('tactical')
   const [layers, setLayers] = useState(DEFAULT_LAYERS)
   const [sidebarOpen, setSidebarOpen] = useState(true)
@@ -55,6 +57,9 @@ export default function App() {
 
   return (
     <div className="app-container scanlines">
+      {/* Cinematic Boot Sequence Overlay */}
+      {showLanding && <LandingPage onEnter={() => setShowLanding(false)} />}
+
       <div className="canvas-wrapper">
         <MapView
           layers={layers}

@@ -151,7 +151,7 @@ export default function Sidebar({
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                             <img
-                                src="/logo removed.png"
+                                src={`${import.meta.env.BASE_URL}logo removed.png`}
                                 alt="ARGUS"
                                 style={{
                                     width: '42px',
