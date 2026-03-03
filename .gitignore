@@ -25,3 +25,4 @@ dist-ssr
 credentials.js
 test_opensky.json
 test_celestrak.json
+.env
